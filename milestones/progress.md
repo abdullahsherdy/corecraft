@@ -52,6 +52,12 @@ Pick one and go:
 
 ## Session log
 
+### 2026-06-27 (OG image fix)
+- Fixed OG image not showing when sharing Vercel links: the homepage, `/courses`, and `/courses/[slug]` each set an explicit `openGraph: { title, description, url }` without `images`, which overrode the `opengraph-image.tsx` file-convention injection (Next.js dropped the `og:image` meta). Removed the explicit `openGraph` blocks so the file convention auto-injects `og:image` + `twitter:image` (verified in rendered HTML); `og:title`/`og:description` now auto-derive from `title`/`description`
+- Fixed `undefined` in canonical URLs: `/courses` and `/courses/[slug]` used `${process.env.NEXT_PUBLIC_SITE_URL}/...` without a fallback → emitted `undefined/courses`. Added `?? 'https://corecraft.io'` fallback (matches the homepage pattern)
+- Note: OG image *route* returns 500 on Windows dev only (`@vercel/og` default-font `fileURLToPath` path bug); works fine on Vercel (Linux) — not a production issue
+- `pnpm lint` and `pnpm type-check` both pass clean
+
 ### 2026-06-27 (500 fix + Button asChild)
 - Fixed `GET / 500`: `createClient` threw `Configuration must contain projectId` when `NEXT_PUBLIC_SANITY_PROJECT_ID` was unset (no `.env`). Made Sanity client nullable + added `sanityFetch`/`sanityFetchOne` helpers that return `[]`/`null` when unconfigured; routed all 6 fetch sites (`CoursesPreview`, `/courses`, `/courses/[slug]` x3, `sitemap`, OG image) through them. Pages now render empty-state fallbacks instead of crashing
 - Fixed `Button` `asChild` prop leak (was spreading onto the DOM → React warning + invalid `<button><a>` nesting). Implemented a minimal Slot via `cloneElement`; flipped all call sites from `asChild={false}` to `asChild`

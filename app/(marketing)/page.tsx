@@ -12,11 +12,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io',
   },
-  openGraph: {
-    title:       'CoreCraft — Learn Programming Fundamentals',
-    description: 'Master the fundamentals. Build anything.',
-    url:          process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io',
-  },
 };
 
 export default function HomePage() {

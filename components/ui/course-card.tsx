@@ -27,7 +27,7 @@ const levelLabel: Record<Level, string> = {
 };
 
 const levelStyles: Record<Level, string> = {
-  beginner:     'bg-[#E6FAF8] text-[#007A6B]',
+  beginner:     'bg-[#E6F7EC] text-[#1F6B3A]',
   intermediate: 'bg-[#FFF5E0] text-[#7A4E00]',
   advanced:     'bg-[#FFE6E0] text-[#7A2E00]',
 };
@@ -64,7 +64,7 @@ export function CourseCard({ title, slug, track, level, duration, excerpt }: Cou
             {duration}
           </span>
           <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-teal">
-            View
+            View course
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </span>
         </div>

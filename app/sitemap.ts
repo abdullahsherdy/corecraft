@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { client } from '@/lib/sanity/client';
+import { sanityFetch } from '@/lib/sanity/client';
 import { COURSE_SLUGS_QUERY, POST_SLUGS_QUERY } from '@/lib/sanity/queries';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io';
@@ -15,8 +15,8 @@ const staticRoutes: MetadataRoute.Sitemap = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [courseSlugs, postSlugs] = await Promise.all([
-    client.fetch<{ slug: string }[]>(COURSE_SLUGS_QUERY),
-    client.fetch<{ slug: string }[]>(POST_SLUGS_QUERY),
+    sanityFetch<{ slug: string }>(COURSE_SLUGS_QUERY),
+    sanityFetch<{ slug: string }>(POST_SLUGS_QUERY),
   ]);
 
   const courseRoutes: MetadataRoute.Sitemap = courseSlugs.map(({ slug }) => ({

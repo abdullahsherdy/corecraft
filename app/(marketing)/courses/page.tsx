@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { client } from '@/lib/sanity/client';
+import { sanityFetch } from '@/lib/sanity/client';
 import { COURSES_QUERY } from '@/lib/sanity/queries';
 import type { Course } from '@/lib/sanity/types';
 import { CourseCard } from '@/components/ui/course-card';
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 };
 
 export default async function CoursesPage() {
-  const courses = await client.fetch<Course[]>(COURSES_QUERY);
+  const courses = await sanityFetch<Course>(COURSES_QUERY);
 
   return (
     <main>
+      
       <section className="bg-brand-fog px-4 py-16">
         <div className="mx-auto max-w-6xl">
           <span className="mb-3 inline-block rounded-full border border-brand-teal px-3 py-1 text-xs font-medium text-brand-teal">
@@ -41,7 +42,7 @@ export default async function CoursesPage() {
               Courses are being prepared. Check back soon.
             </p>
           ) : (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {courses.map((c) => (
                 <CourseCard
                   key={c._id}

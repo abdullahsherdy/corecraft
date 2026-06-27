@@ -2,19 +2,27 @@ export interface Slug {
   current: string;
 }
 
+export interface SanityBlock {
+  _type: string;
+  _key:  string;
+  [key: string]: unknown;
+}
+
 export interface Course {
-  _id:           string;
-  title:         string;
-  slug:          Slug;
-  track:         'foundations' | 'backend' | 'frontend';
-  level:         'beginner' | 'intermediate' | 'advanced';
-  duration:      string;
-  excerpt:       string;
-  description?:  unknown[];
-  syllabus?:     string[];
+  _id:            string;
+  title:          string;
+  slug:           Slug;
+  track:          'foundations' | 'backend' | 'frontend';
+  level:          'beginner' | 'intermediate' | 'advanced';
+  duration:       string;
+  excerpt:        string;
+  description?:   SanityBlock[];
+  outcomes?:      string[];
+  syllabus?:      string[];
   prerequisites?: string[];
-  isFeatured:    boolean;
-  order?:        number;
+  audience?:      string;
+  isFeatured:     boolean;
+  order?:         number;
 }
 
 export interface Post {
@@ -23,7 +31,7 @@ export interface Post {
   slug:        Slug;
   publishedAt: string;
   excerpt:     string;
-  body?:       unknown[];
+  body?:       SanityBlock[];
 }
 
 export interface SiteSettings {

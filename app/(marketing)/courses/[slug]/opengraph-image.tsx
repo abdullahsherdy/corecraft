@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { client } from '@/lib/sanity/client';
+import { sanityFetchOne } from '@/lib/sanity/client';
 import { COURSE_BY_SLUG_QUERY } from '@/lib/sanity/queries';
 import type { Course } from '@/lib/sanity/types';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default async function OgImage({ params }: Props) {
-  const course = await client.fetch<Course | null>(COURSE_BY_SLUG_QUERY, {
+  const course = await sanityFetchOne<Course>(COURSE_BY_SLUG_QUERY, {
     slug: params.slug,
   });
 

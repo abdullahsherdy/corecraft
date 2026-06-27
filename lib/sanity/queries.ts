@@ -13,7 +13,13 @@ export const COURSE_SLUGS_QUERY = `
 export const COURSE_BY_SLUG_QUERY = `
   *[_type == "course" && slug.current == $slug][0] {
     _id, title, slug, track, level, duration, excerpt, description,
-    syllabus, prerequisites, isFeatured
+    outcomes, syllabus, prerequisites, audience, isFeatured
+  }
+`;
+
+export const FEATURED_COURSES_QUERY = `
+  *[_type == "course" && isFeatured == true && !(_id in path("drafts.**"))] | order(order asc) {
+    _id, title, slug, track, level, duration, excerpt, isFeatured
   }
 `;
 

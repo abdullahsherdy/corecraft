@@ -14,10 +14,10 @@ export function HeroSection() {
           so you understand the why, not just the how.
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Button size="lg" asChild={false}>
+          <Button size="lg" asChild>
             <Link href="/courses">Explore courses</Link>
           </Button>
-          <Button variant="ghost" size="lg" asChild={false}>
+          <Button variant="ghost" size="lg" asChild>
             <Link href="/mentorship">Book a mentorship call</Link>
           </Button>
         </div>

@@ -18,7 +18,7 @@ export default function NotFound() {
           The page you are looking for does not exist.
         </p>
         <div className="mt-8">
-          <Button asChild={false}>
+          <Button asChild>
             <Link href="/">Go home</Link>
           </Button>
         </div>

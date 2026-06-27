@@ -11,8 +11,8 @@ working session. Newest entries on top.
 - **Tooling**: Next.js 14.2.30 + TS strict + Tailwind v3 + pnpm 11 configured
 - **Deploy**: Vercel pipeline working (resolved lockfile + React 18 / Sanity v3 compat)
 - **Design tokens**: `tailwind.config.ts` extended with brand palette + display/body fonts
-- **Sanity**: Studio mounted at `/studio`; schemas defined for `course`, `post`, `siteSettings`; client + GROQ queries + types in `lib/sanity/`
-- **UI primitives**: `Button`, `Badge`, `Section`, `CourseCard`, `Logo`
+- **Sanity**: Studio mounted at `/studio`; schemas defined for `course`, `post`, `siteSettings`; client + GROQ queries + types in `lib/sanity/`; **nullable client + `sanityFetch`/`sanityFetchOne` helpers** so pages render empty states instead of 500 when `NEXT_PUBLIC_SANITY_PROJECT_ID` is unset
+- **UI primitives**: `Button` (Radix-style `asChild` Slot — no more `<a>` nested in `<button>`), `Badge`, `Section`, `CourseCard`, `Logo`
 - **Layout**: `Header`, `Footer`, `Nav`, `NavDrawer` (mobile)
 - **Homepage** (`/`): `HeroSection`, `ServicesSection`, `CoursesPreview` (Sanity `FEATURED_COURSES_QUERY`, shared `CourseCard`), `StatsStrip`, `CtaSection`
 - **`/courses` catalog**: wired to `COURSES_QUERY`, renders `CourseCard` grid (1/2/3-col at sm/md/lg), includes `metadata` with OG + canonical, empty-state fallback
@@ -51,6 +51,12 @@ Pick one and go:
 ---
 
 ## Session log
+
+### 2026-06-27 (500 fix + Button asChild)
+- Fixed `GET / 500`: `createClient` threw `Configuration must contain projectId` when `NEXT_PUBLIC_SANITY_PROJECT_ID` was unset (no `.env`). Made Sanity client nullable + added `sanityFetch`/`sanityFetchOne` helpers that return `[]`/`null` when unconfigured; routed all 6 fetch sites (`CoursesPreview`, `/courses`, `/courses/[slug]` x3, `sitemap`, OG image) through them. Pages now render empty-state fallbacks instead of crashing
+- Fixed `Button` `asChild` prop leak (was spreading onto the DOM → React warning + invalid `<button><a>` nesting). Implemented a minimal Slot via `cloneElement`; flipped all call sites from `asChild={false}` to `asChild`
+- Cleared corrupted `.next` cache (stale vendor chunks); clean build verified `GET / 200`, `/courses`, `/about`, `/contact` all 200
+- `pnpm lint` and `pnpm type-check` both pass clean
 
 ### 2026-06-27 (courses section build)
 - Built full `/courses/[slug]` detail page: navy hero (track/level/duration badges), 65/35 body (outcomes checklist, numbered syllabus, prerequisites arrow list, audience), sticky enrollment card (amber CTA + quick stats), navy CTA strip

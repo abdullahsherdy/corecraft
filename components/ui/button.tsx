@@ -1,3 +1,4 @@
+import { cloneElement, isValidElement, type ReactElement } from 'react';
 import { cn } from '@/lib/utils';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
@@ -21,16 +22,22 @@ const sizes: Record<Size, string> = {
   lg: 'px-8 py-4 text-lg rounded-xl',
 };
 
-export function Button({ variant = 'primary', size = 'md', className, ...props }: ButtonProps) {
+export function Button({ variant = 'primary', size = 'md', className, asChild = false, children, ...props }: ButtonProps) {
+  const classes = cn(
+    'inline-flex items-center justify-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal disabled:opacity-50',
+    variants[variant],
+    sizes[size],
+    className
+  );
+
+  if (asChild && isValidElement(children)) {
+    const child = children as ReactElement<{ className?: string }>;
+    return cloneElement(child, { className: cn(classes, child.props.className) });
+  }
+
   return (
-    <button
-      className={cn(
-        'inline-flex items-center justify-center transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal disabled:opacity-50',
-        variants[variant],
-        sizes[size],
-        className
-      )}
-      {...props}
-    />
+    <button className={classes} {...props}>
+      {children}
+    </button>
   );
 }

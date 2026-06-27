@@ -14,10 +14,10 @@ export function CtaSection() {
           No shortcuts, no magic — just clear explanations and real practice.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Button size="lg" asChild={false}>
+          <Button size="lg" asChild>
             <Link href="/courses">Explore courses</Link>
           </Button>
-          <Button variant="secondary" size="lg" className="bg-white/10 hover:bg-white/20 text-white border border-white/20" asChild={false}>
+          <Button variant="secondary" size="lg" className="bg-white/10 hover:bg-white/20 text-white border border-white/20" asChild>
             <Link href="/contact">Talk to an instructor</Link>
           </Button>
         </div>

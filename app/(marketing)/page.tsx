@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'CoreCraft teaches Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms through private mentorship, private courses, and group courses.',
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io',
+    canonical: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app',
   },
 };
 

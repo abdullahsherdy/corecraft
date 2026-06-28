@@ -6,8 +6,8 @@ import { CourseCard } from '@/components/ui/course-card';
 
 export const metadata: Metadata = {
   title: 'Courses — CoreCraft',
-  description: 'Programming fundamentals taught from scratch — Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms.',
-  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io'}/courses` },
+  description: 'Programming fundamentals taught from scratch — Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms. Private and group sessions.',
+  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app'}/courses` },
 };
 
 export default async function CoursesPage() {

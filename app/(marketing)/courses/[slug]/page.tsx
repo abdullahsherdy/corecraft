@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Course not found — CoreCraft' };
   }
 
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io'}/courses/${course.slug.current}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app'}/courses/${course.slug.current}`;
   const title = `${course.title} — CoreCraft`;
 
   return {

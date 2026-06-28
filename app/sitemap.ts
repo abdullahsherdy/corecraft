@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { sanityFetch } from '@/lib/sanity/client';
 import { COURSE_SLUGS_QUERY, POST_SLUGS_QUERY } from '@/lib/sanity/queries';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app';
 
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: BASE_URL,               lastModified: new Date(), changeFrequency: 'weekly',  priority: 1 },

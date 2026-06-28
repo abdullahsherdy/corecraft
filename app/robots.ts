@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft.io';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app';
 
 export default function robots(): MetadataRoute.Robots {
   return {

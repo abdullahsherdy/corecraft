@@ -1,16 +1,16 @@
 import type { MetadataRoute } from 'next';
 import { sanityFetch } from '@/lib/sanity/client';
 import { COURSE_SLUGS_QUERY, POST_SLUGS_QUERY } from '@/lib/sanity/queries';
+import { SITE_URL } from '@/lib/site';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app';
+const lastModified = new Date();
 
 const staticRoutes: MetadataRoute.Sitemap = [
-  { url: BASE_URL,               lastModified: new Date(), changeFrequency: 'weekly',  priority: 1 },
-  { url: `${BASE_URL}/courses`,  lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
-  { url: `${BASE_URL}/mentorship`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/about`,    lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/blog`,     lastModified: new Date(), changeFrequency: 'daily',   priority: 0.8 },
-  { url: `${BASE_URL}/contact`,  lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.5 },
+  { url: SITE_URL,                 lastModified, changeFrequency: 'weekly',  priority: 1 },
+  { url: `${SITE_URL}/courses`,    lastModified, changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${SITE_URL}/mentorship`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
+  { url: `${SITE_URL}/about`,      lastModified, changeFrequency: 'monthly', priority: 0.7 },
+  { url: `${SITE_URL}/contact`,    lastModified, changeFrequency: 'yearly', priority: 0.5 },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,15 +20,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const courseRoutes: MetadataRoute.Sitemap = courseSlugs.map(({ slug }) => ({
-    url: `${BASE_URL}/courses/${slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/courses/${slug}`,
+    lastModified,
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
   const postRoutes: MetadataRoute.Sitemap = postSlugs.map(({ slug }) => ({
-    url: `${BASE_URL}/blog/${slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/blog/${slug}`,
+    lastModified,
     changeFrequency: 'monthly',
     priority: 0.7,
   }));

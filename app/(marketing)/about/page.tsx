@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { Section } from '@/components/ui/section';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app';
+import { JsonLd } from '@/components/seo/json-ld';
+import { personLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'About Abdullah Sherdy — CoreCraft',
+  title: 'About Abdullah Sherdy',
   description: 'Meet Abdullah Sherdy, software engineer and coding instructor teaching programming fundamentals — Intro, OOP, FP, and DSA — in Arabic and English.',
-  alternates: { canonical: `${SITE_URL}/about` },
+  alternates: { canonical: '/about' },
 };
 
 const principles = [
@@ -25,6 +25,7 @@ const experience = [
 export default function AboutPage() {
   return (
     <main>
+      <JsonLd data={personLd()} />
       <section className="bg-brand-fog px-4 py-16 md:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-[1.4fr_0.8fr]">
           <div>
@@ -55,7 +56,7 @@ export default function AboutPage() {
       <Section>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-brand-navy/45">
+            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-brand-navy/60">
               Teaching philosophy
             </p>
             <h2 className="font-display text-3xl font-bold text-brand-navy md:text-4xl">
@@ -80,7 +81,7 @@ export default function AboutPage() {
       <Section className="bg-brand-fog">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-brand-navy/45">
+            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-brand-navy/60">
               Background and experience
             </p>
             <h2 className="font-display text-3xl font-bold text-brand-navy md:text-4xl">
@@ -102,7 +103,7 @@ export default function AboutPage() {
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {experience.map((item) => (
               <div key={item.label} className="rounded-brand border border-brand-navy/10 bg-white p-5">
-                <dt className="text-sm font-medium text-brand-navy/45">{item.label}</dt>
+                <dt className="text-sm font-medium text-brand-navy/60">{item.label}</dt>
                 <dd className="mt-1 font-display text-2xl font-medium text-brand-navy">{item.value}</dd>
               </div>
             ))}

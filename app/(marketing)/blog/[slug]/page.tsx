@@ -7,8 +7,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
-    title: params.slug,
-    description: `Read ${params.slug} on CoreCraft Blog.`,
+    title: 'Blog post',
+    description: 'Read programming fundamentals explained clearly on the CoreCraft blog.',
+    alternates: { canonical: `/blog/${params.slug}` },
+    robots: { index: false, follow: true },
   };
 }
 

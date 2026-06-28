@@ -4,10 +4,12 @@ import { COURSES_QUERY } from '@/lib/sanity/queries';
 import type { Course } from '@/lib/sanity/types';
 import { CourseCard } from '@/components/ui/course-card';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-  title: 'Courses — CoreCraft',
+  title: 'Courses',
   description: 'Programming fundamentals taught from scratch — Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms. Private and group sessions.',
-  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app'}/courses` },
+  alternates: { canonical: '/courses' },
 };
 
 export default async function CoursesPage() {

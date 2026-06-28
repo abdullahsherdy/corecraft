@@ -4,7 +4,8 @@ import { Section } from '@/components/ui/section';
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Programming fundamentals explained clearly. Learn OOP, functional programming, algorithms, and more with CoreCraft.',
-  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog` },
+  alternates: { canonical: '/blog' },
+  robots: { index: false, follow: true },
 };
 
 export default function BlogPage() {

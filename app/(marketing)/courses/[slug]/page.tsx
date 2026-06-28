@@ -6,22 +6,15 @@ import { sanityFetch, sanityFetchOne } from '@/lib/sanity/client';
 import { COURSE_BY_SLUG_QUERY, COURSE_SLUGS_QUERY } from '@/lib/sanity/queries';
 import type { Course } from '@/lib/sanity/types';
 import { cn } from '@/lib/utils';
+import { JsonLd } from '@/components/seo/json-ld';
+import { courseLd, breadcrumbLd } from '@/lib/seo';
+import { trackLabel, levelLabel } from '@/lib/nav';
 
 interface Props {
   params: { slug: string };
 }
 
-const trackLabel: Record<Course['track'], string> = {
-  foundations: 'Foundations',
-  backend:     'Backend',
-  frontend:    'Frontend',
-};
-
-const levelLabel: Record<Course['level'], string> = {
-  beginner:     'Beginner',
-  intermediate: 'Intermediate',
-  advanced:     'Advanced',
-};
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const slugs = await sanityFetch<{ slug: string }>(COURSE_SLUGS_QUERY);
@@ -34,16 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   if (!course) {
-    return { title: 'Course not found — CoreCraft' };
+    return { title: 'Course not found' };
   }
 
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corecraft-one.vercel.app'}/courses/${course.slug.current}`;
-  const title = `${course.title} — CoreCraft`;
-
   return {
-    title,
+    title: course.title,
     description: course.excerpt,
-    alternates: { canonical: url },
+    alternates: { canonical: `/courses/${course.slug.current}` },
   };
 }
 
@@ -60,8 +50,28 @@ export default async function CourseDetailPage({ params }: Props) {
   const syllabus      = course.syllabus ?? [];
   const prerequisites = course.prerequisites ?? [];
 
+  const slug = course.slug.current;
+
   return (
     <main>
+      <JsonLd
+        data={[
+          courseLd({
+            title: course.title,
+            slug,
+            excerpt: course.excerpt,
+            track: course.track,
+            level: course.level,
+            duration: course.duration,
+            outcomes,
+          }),
+          breadcrumbLd([
+            { name: 'Home', path: '/' },
+            { name: 'Courses', path: '/courses' },
+            { name: course.title, path: `/courses/${slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-brand-navy px-4 py-12 md:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="mb-4 flex flex-wrap gap-2">
@@ -79,7 +89,7 @@ export default async function CourseDetailPage({ params }: Props) {
           <h1 className="font-display text-4xl font-bold text-white md:text-5xl">
             {course.title}
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/50 md:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
             {course.excerpt}
           </p>
         </div>
@@ -159,36 +169,32 @@ export default async function CourseDetailPage({ params }: Props) {
 
             <aside className="lg:sticky lg:top-24 lg:self-start">
               <div className="rounded-xl border border-brand-navy/10 bg-brand-fog p-6">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-brand-navy/45">
+                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-brand-navy/60">
                   Private course
                 </p>
                 <p className="mb-5 font-display text-lg font-medium text-brand-navy">
                   Enroll or inquire
                 </p>
                 <Link
-                  href="/contact"
+                  href="/mentorship"
                   className="inline-flex w-full items-center justify-center rounded-lg bg-brand-amber px-6 py-3 text-base font-medium text-brand-midnight transition-colors hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                 >
                   Book a free session
                 </Link>
-                <p className="mt-2 text-center text-xs text-brand-navy/40">
+                <p className="mt-2 text-center text-xs text-brand-navy/60">
                   No commitment required
                 </p>
                 <dl className="mt-6 space-y-3 border-t border-brand-navy/10 pt-5">
                   <div className="flex justify-between">
-                    <dt className="text-sm text-brand-navy/50">Duration</dt>
+                    <dt className="text-sm text-brand-navy/60">Duration</dt>
                     <dd className="text-sm font-medium text-brand-navy">{course.duration}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-sm text-brand-navy/50">Format</dt>
+                    <dt className="text-sm text-brand-navy/60">Format</dt>
                     <dd className="text-sm font-medium text-brand-navy">Private / Group</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-sm text-brand-navy/50">Session length</dt>
-                    <dd className="text-sm font-medium text-brand-navy">1 hour</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-sm text-brand-navy/50">Language</dt>
+                    <dt className="text-sm text-brand-navy/60">Language</dt>
                     <dd className="text-sm font-medium text-brand-navy">Arabic / English</dd>
                   </div>
                 </dl>
@@ -203,11 +209,11 @@ export default async function CourseDetailPage({ params }: Props) {
           <h2 className="font-display text-2xl font-medium text-white md:text-3xl">
             Ready to start this course?
           </h2>
-          <p className="mt-2 text-base text-white/45">
+          <p className="mt-2 text-base text-white/70">
             Start with a free intro session. No commitment.
           </p>
           <Link
-            href="/contact"
+            href="/mentorship"
             className="mt-6 inline-flex items-center justify-center rounded-lg bg-brand-amber px-8 py-3 text-base font-medium text-brand-midnight transition-colors hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
           >
             Book a free session

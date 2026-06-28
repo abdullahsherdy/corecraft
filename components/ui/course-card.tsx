@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Clock, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Course } from '@/lib/sanity/types';
+import { trackLabel, levelLabel } from '@/lib/nav';
 
 interface CourseCardProps {
   title:    string;
@@ -11,18 +12,6 @@ interface CourseCardProps {
   duration: string;
   excerpt:  string;
 }
-
-const trackLabel: Record<Course['track'], string> = {
-  foundations: 'Foundations',
-  backend:     'Backend',
-  frontend:    'Frontend',
-};
-
-const levelLabel: Record<Course['level'], string> = {
-  beginner:     'Beginner',
-  intermediate: 'Intermediate',
-  advanced:     'Advanced',
-};
 
 const levelStyles: Record<Course['level'], string> = {
   beginner:     'bg-[#E6F7EC] text-[#1F6B3A]',

@@ -3,6 +3,7 @@ import { sanityFetchOne } from '@/lib/sanity/client';
 import { COURSE_BY_SLUG_QUERY } from '@/lib/sanity/queries';
 import type { Course } from '@/lib/sanity/types';
 
+export const runtime = 'edge';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

@@ -1,12 +1,7 @@
-import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Home, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-export const metadata: Metadata = {
-  title: 'Page not found',
-  description: 'The CoreCraft page you requested could not be found.',
-};
 
 export default function NotFound() {
   return (
@@ -49,14 +44,19 @@ export default function NotFound() {
 
         <div className="relative order-1 mx-auto w-full max-w-xl md:order-2">
           <div className="absolute -left-4 top-8 hidden rounded-[1rem_1rem_1rem_0] border border-brand-navy/10 bg-white px-4 py-3 shadow-sm sm:block">
-            <p className="font-display text-sm font-medium text-brand-navy">You can't debug me.</p>
+            <p className="font-display text-sm font-medium text-brand-navy">
+              You can&apos;t debug me.
+            </p>
             <p className="mt-0.5 text-xs text-brand-navy/55">I have nine stack traces.</p>
           </div>
           <div className="rounded-brand border border-brand-navy/10 bg-white p-4 shadow-sm">
-            <img
+            <Image
               src="/images/not-found-cat.svg"
               alt="A playful illustrated cat beside a 404 error scene"
+              width={960}
+              height={720}
               className="h-auto w-full"
+              priority
             />
           </div>
         </div>

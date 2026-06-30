@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { navLinks } from '@/lib/nav';
+import { primaryNavLinks } from '@/lib/nav';
 import { cn } from '@/lib/utils';
 
 export function Nav() {
@@ -11,7 +11,7 @@ export function Nav() {
   return (
     <nav aria-label="Main navigation">
       <ul className="flex items-center gap-6">
-        {navLinks.map(({ href, label }) => {
+        {primaryNavLinks.map(({ href, label }) => {
           const active = pathname === href || pathname.startsWith(`${href}/`);
           return (
             <li key={href}>

@@ -18,10 +18,10 @@ export function Header() {
         <div className="hidden md:flex items-center gap-8">
           <Nav />
           <Link
-            href="/mentorship"
+            href="/contact"
             className="text-sm font-medium font-body text-brand-teal hover:underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal rounded"
           >
-            Get started
+            Book free intro call
           </Link>
         </div>
 

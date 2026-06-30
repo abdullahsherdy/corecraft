@@ -1,11 +1,15 @@
 import type { Course } from '@/lib/sanity/types';
 
-export const navLinks = [
+export const primaryNavLinks = [
   { href: '/courses', label: 'Courses' },
   { href: '/mentorship', label: 'Mentorship' },
   { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
+] as const;
+
+export const footerNavLinks = [
+  ...primaryNavLinks,
+  { href: '/blog', label: 'Blog' },
 ] as const;
 
 export const trackLabel: Record<Course['track'], string> = {

@@ -1,19 +1,19 @@
 import { Section } from '@/components/ui/section';
 
 const stats = [
-  { value: '100+',     label: 'Students' },
-  { value: '4',        label: 'Core subjects' },
-  { value: '1-on-1',   label: 'Mentorship available' },
+  { value: '100+', label: 'Students taught' },
+  { value: '4', label: 'Core subjects' },
+  { value: 'Arabic / English', label: 'Teaching languages' },
 ];
 
 export function StatsStrip() {
   return (
     <Section className="bg-brand-fog py-12">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+      <div className="grid grid-cols-1 gap-8 text-center sm:grid-cols-3">
         {stats.map(({ value, label }) => (
           <div key={label}>
-            <p className="text-4xl font-bold font-display text-brand-navy">{value}</p>
-            <p className="mt-1 text-base font-body text-brand-navy-muted">{label}</p>
+            <p className="font-display text-3xl font-bold text-brand-navy md:text-4xl">{value}</p>
+            <p className="mt-1 font-body text-base text-brand-navy/65">{label}</p>
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import { cloneElement, isValidElement, type ReactElement } from 'react';
 import { cn } from '@/lib/utils';
 
-type Variant = 'primary' | 'secondary' | 'ghost';
+type Variant = 'primary' | 'secondary' | 'outline' | 'ghost';
 type Size    = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,6 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const variants: Record<Variant, string> = {
   primary:   'bg-brand-amber text-brand-midnight hover:bg-amber-400 font-medium',
   secondary: 'bg-brand-navy text-white hover:bg-brand-navy-muted font-medium',
+  outline:   'border border-brand-navy/15 bg-white text-brand-navy hover:border-brand-teal font-medium',
   ghost:     'text-brand-teal underline-offset-4 hover:underline',
 };
 

@@ -176,14 +176,23 @@ export default async function CourseDetailPage({ params }: Props) {
                   Enroll or inquire
                 </p>
                 <Link
-                  href="/mentorship"
+                  href="/contact"
                   className="inline-flex w-full items-center justify-center rounded-lg bg-brand-amber px-6 py-3 text-base font-medium text-brand-midnight transition-colors hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                 >
-                  Book a free session
+                  Book free intro call
                 </Link>
                 <p className="mt-2 text-center text-xs text-brand-navy/60">
                   No commitment required
                 </p>
+                <div className="mt-5 rounded-lg bg-white p-4">
+                  <p className="font-display text-sm font-medium text-brand-navy">
+                    What happens next
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-navy/65">
+                    Share your current level, ask questions, and get a recommended plan for this
+                    course or mentorship.
+                  </p>
+                </div>
                 <dl className="mt-6 space-y-3 border-t border-brand-navy/10 pt-5">
                   <div className="flex justify-between">
                     <dt className="text-sm text-brand-navy/60">Duration</dt>
@@ -210,13 +219,13 @@ export default async function CourseDetailPage({ params }: Props) {
             Ready to start this course?
           </h2>
           <p className="mt-2 text-base text-white/70">
-            Start with a free intro session. No commitment.
+            Start with a free intro call. No commitment.
           </p>
           <Link
-            href="/mentorship"
+            href="/contact"
             className="mt-6 inline-flex items-center justify-center rounded-lg bg-brand-amber px-8 py-3 text-base font-medium text-brand-midnight transition-colors hover:bg-amber-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
           >
-            Book a free session
+            Book free intro call
           </Link>
         </div>
       </section>

@@ -14,7 +14,7 @@ interface CourseCardProps {
 }
 
 const levelStyles: Record<Course['level'], string> = {
-  beginner:     'bg-[#E6F7EC] text-[#1F6B3A]',
+  beginner:     'bg-brand-teal/10 text-[#007A6B]',
   intermediate: 'bg-[#FFF5E0] text-[#7A4E00]',
   advanced:     'bg-[#FFE6E0] text-[#7A2E00]',
 };
@@ -25,8 +25,8 @@ export function CourseCard({ title, slug, track, level, duration, excerpt }: Cou
       href={`/courses/${slug}`}
       className={cn(
         'group flex flex-col overflow-hidden rounded-xl border border-brand-navy/10 bg-white',
-        'transition-colors duration-150 hover:border-brand-teal',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal'
+        'transition-colors duration-150 hover:border-brand-teal hover:bg-brand-fog/40',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal',
       )}
     >
       <div className="h-[3px] bg-brand-teal" aria-hidden="true" />

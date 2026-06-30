@@ -19,23 +19,23 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'CoreCraft — Learn Programming Fundamentals',
-    template: '%s — CoreCraft',
+    default: 'CoreCraft - Learn Programming Fundamentals',
+    template: '%s - CoreCraft',
   },
   description:
-    'CoreCraft teaches programming fundamentals: Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms — through private mentorship, private courses, and group courses.',
+    'CoreCraft teaches programming fundamentals: Intro to Programming, OOP, Functional Programming, and Data Structures & Algorithms through private mentorship, private courses, and group courses.',
   applicationName: 'CoreCraft',
   openGraph: {
     type: 'website',
     siteName: 'CoreCraft',
     url: SITE_URL,
-    title: 'CoreCraft — Learn Programming Fundamentals',
+    title: 'CoreCraft - Learn Programming Fundamentals',
     description:
-      'CoreCraft teaches programming fundamentals: Intro, OOP, Functional Programming, and Data Structures & Algorithms — through private mentorship, private courses, and group courses.',
+      'CoreCraft teaches programming fundamentals: Intro, OOP, Functional Programming, and Data Structures & Algorithms through private mentorship, private courses, and group courses.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CoreCraft — Learn Programming Fundamentals',
+    title: 'CoreCraft - Learn Programming Fundamentals',
     description:
       'Master the fundamentals every framework is built on. Private mentorship, private courses, and group courses.',
   },

@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
-import { navLinks } from '@/lib/nav';
+import { primaryNavLinks } from '@/lib/nav';
 import { cn } from '@/lib/utils';
 
 interface NavDrawerProps {
@@ -15,6 +16,7 @@ interface NavDrawerProps {
 
 export function NavDrawer({ open, onClose }: NavDrawerProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const prefersReducedMotion =
     typeof window !== 'undefined'
@@ -119,25 +121,32 @@ export function NavDrawer({ open, onClose }: NavDrawerProps) {
         {/* Nav links */}
         <nav aria-label="Mobile navigation" className="flex-1 flex flex-col justify-center px-5">
           <ul className="flex flex-col gap-2">
-            {navLinks.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  onClick={onClose}
-                  className="block py-3 text-lg font-medium font-body text-white/80 hover:text-white border-b border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal rounded transition-colors"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {primaryNavLinks.map(({ href, label }) => {
+              const active = pathname === href || pathname.startsWith(`${href}/`);
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    onClick={onClose}
+                    aria-current={active ? 'page' : undefined}
+                    className={cn(
+                      'block rounded border-b border-white/10 py-3 font-body text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal',
+                      active ? 'text-brand-teal' : 'text-white/80 hover:text-white'
+                    )}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
         {/* CTA */}
         <div className="px-5 pb-8 shrink-0">
-          <Link href="/mentorship" onClick={onClose} className="block">
+          <Link href="/contact" onClick={onClose} className="block">
             <Button variant="primary" size="lg" className="w-full">
-              Get started
+              Book free intro call
             </Button>
           </Link>
         </div>

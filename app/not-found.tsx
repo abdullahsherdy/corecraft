@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Code2 } from 'lucide-react';
+import { Home, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
@@ -10,68 +10,57 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-[70vh] items-center justify-center bg-white px-4 py-16">
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-        <div className="relative flex h-72 w-full max-w-md items-center justify-center overflow-hidden rounded-brand bg-brand-fog md:h-80">
-          <div className="absolute left-8 top-8 h-20 w-20 rounded-full bg-brand-teal/15" />
-          <div className="absolute bottom-8 right-8 h-24 w-24 rounded-full bg-brand-amber/20" />
-          <div className="absolute right-16 top-12 rounded-lg border border-brand-navy/10 bg-white px-3 py-2 font-mono text-xs font-medium text-brand-navy shadow-sm">
-            route.ts
-          </div>
-          <div className="absolute bottom-14 left-12 rounded-lg bg-brand-navy px-3 py-2 font-mono text-xs font-medium text-white shadow-sm">
-            404
-          </div>
-
-          <div className="relative flex h-40 w-40 items-center justify-center rounded-full border border-brand-navy/10 bg-white shadow-sm">
-            <div className="absolute h-28 w-28 rounded-full border-8 border-brand-teal/20" />
-            <Code2 className="h-16 w-16 text-brand-teal" aria-hidden="true" />
-          </div>
-
-          <div className="scan-line absolute left-1/2 top-0 h-full w-px bg-brand-amber" />
+    <main className="flex min-h-[78vh] items-center justify-center overflow-hidden bg-white px-4 py-12">
+      <section className="relative mx-auto grid w-full max-w-6xl items-center gap-10 overflow-hidden rounded-brand bg-brand-fog px-4 py-10 md:grid-cols-[1.05fr_0.95fr] md:px-10 md:py-14">
+        <div className="absolute left-6 top-6 hidden rounded-full border border-brand-teal/30 bg-white px-3 py-1 font-mono text-xs font-medium text-brand-teal md:block">
+          route: undefined
+        </div>
+        <div className="absolute right-6 top-6 hidden rounded-full bg-brand-amber/20 px-3 py-1 font-mono text-xs font-medium text-brand-navy md:block">
+          status: hiding
         </div>
 
-        <div className="mt-8 w-full max-w-2xl space-y-4 px-2">
+        <div className="relative order-2 text-center md:order-1 md:text-left">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-brand-teal">
             404
           </p>
-          <h1 className="font-display text-4xl font-bold text-brand-navy md:text-5xl">
-            Page not found
+          <h1 className="mt-4 font-display text-4xl font-bold text-brand-navy md:text-6xl">
+            Oops. This page is hiding.
           </h1>
-          <p className="mx-auto max-w-xl text-base leading-relaxed text-brand-navy/70 md:text-lg">
-            The page you are looking for does not exist or has been moved. Head back home and
-            keep building with CoreCraft.
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-brand-navy/70 md:mx-0 md:text-lg">
+            The route slipped under the table and the cat is pretending it saw nothing. Try a
+            safer path back into CoreCraft.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
             <Button asChild className="gap-2 rounded-full px-7">
               <Link href="/">
+                <Home className="h-4 w-4" aria-hidden="true" />
                 Go home
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
-            <Button variant="outline" asChild className="rounded-full px-7">
-              <Link href="/courses">Browse courses</Link>
+            <Button variant="outline" asChild className="gap-2 rounded-full px-7">
+              <Link href="/courses">
+                <Search className="h-4 w-4" aria-hidden="true" />
+                Browse courses
+              </Link>
             </Button>
           </div>
         </div>
-      </div>
-      <style>{`
-        @keyframes scan {
-          0%, 100% { transform: translateX(-5rem); opacity: 0; }
-          20%, 80% { opacity: 1; }
-          50% { transform: translateX(5rem); }
-        }
 
-        .scan-line {
-          animation: scan 2.6s ease-in-out infinite;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .scan-line {
-            animation: none;
-          }
-        }
-      `}</style>
+        <div className="relative order-1 mx-auto w-full max-w-xl md:order-2">
+          <div className="absolute -left-4 top-8 hidden rounded-[1rem_1rem_1rem_0] border border-brand-navy/10 bg-white px-4 py-3 shadow-sm sm:block">
+            <p className="font-display text-sm font-medium text-brand-navy">You can't debug me.</p>
+            <p className="mt-0.5 text-xs text-brand-navy/55">I have nine stack traces.</p>
+          </div>
+          <div className="rounded-brand border border-brand-navy/10 bg-white p-4 shadow-sm">
+            <img
+              src="/images/not-found-cat.svg"
+              alt="A playful illustrated cat beside a 404 error scene"
+              className="h-auto w-full"
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

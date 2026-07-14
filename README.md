@@ -101,6 +101,7 @@ derive from this system. Do not introduce new colors or font families.
 
 ### Typography
 
+
 Two fonts, loaded via `next/font/google`. No other font families.
 
 ```

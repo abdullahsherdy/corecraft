@@ -62,6 +62,11 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_API_READ_TOKEN=        # server-side reads for draft previews
 NEXT_PUBLIC_SITE_URL=https://corecraft-one.vercel.app
+
+# Supabase (contact submissions, enrollment leads; auth in v2)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=    # server-only, bypasses RLS — never expose to client
 ```
 
 Never hardcode these values. Always read from `process.env`.

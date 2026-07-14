@@ -5,10 +5,11 @@ working session. Newest entries on top.
 
 ---
 
-## Current Status (as of 2026-06-30)
+## Current Status (as of 2026-07-14)
 
 ### Done
 
+- **Supabase scaffolding**: `@supabase/supabase-js` + `@supabase/ssr` installed; `lib/supabase/` has browser client (`client.ts`), cookie-aware server client (`server.ts`, auth-ready for v2), service-role admin client (`admin.ts`), and `Database` types (`types.ts`) — all return `null` when env vars are missing, matching the Sanity fallback pattern; `supabase/schema.sql` defines `contact_submissions` and `enrollment_leads` tables with RLS enabled and no public policies (server-only writes via admin client); env vars documented in CLAUDE.md.
 - **Tooling**: Next.js 14.2.30, TypeScript strict mode, Tailwind v3, pnpm 11 configured in project metadata.
 - **Deploy**: Vercel pipeline previously verified after lockfile and React 18 / Sanity v3 compatibility fixes.
 - **Design tokens**: `tailwind.config.ts` includes CoreCraft brand palette (`brand-navy`, `brand-navy-muted`, `brand-teal`, `brand-amber`, `brand-fog`, `brand-midnight`) plus display/body font families.
@@ -39,6 +40,8 @@ working session. Newest entries on top.
 
 ### Not Started / Needs Follow-Up
 
+- Create the actual Supabase project, run `supabase/schema.sql`, and set env vars locally + on Vercel.
+- Wire `/api/contact` to insert into `contact_submissions` via the admin client (with `react-hook-form` on the frontend).
 - Implement real contact form submission with `react-hook-form` and `/api/contact`.
 - Redesign `/mentorship` with the same quality level as the new homepage/course/contact surfaces.
 - Implement real `/blog` list and `/blog/[slug]` detail pages with Sanity data, `generateStaticParams`, and rich content rendering.
@@ -60,6 +63,20 @@ working session. Newest entries on top.
 ---
 
 ## Session Log
+
+### 2026-07-14 (Supabase architecture scaffolding)
+
+- Installed `@supabase/supabase-js` and `@supabase/ssr`.
+- Created `lib/supabase/`:
+  - `types.ts`: `Database` type with `contact_submissions` and `enrollment_leads` row/insert types.
+  - `client.ts`: `createSupabaseBrowserClient()` for future client-side auth.
+  - `server.ts`: `createSupabaseServerClient()` cookie-aware via `@supabase/ssr` so v2 auth works in server components/route handlers without call-site changes.
+  - `admin.ts`: `createSupabaseAdminClient()` using `SUPABASE_SERVICE_ROLE_KEY` (server-only, bypasses RLS) for form/lead inserts.
+  - All clients return `null` when env vars are unset (same graceful-fallback pattern as Sanity).
+- Added `supabase/schema.sql`: both tables with status checks, indexes, RLS enabled, intentionally no public policies.
+- Documented Supabase env vars in CLAUDE.md.
+- `pnpm lint` and `pnpm type-check` passed.
+- Next: create Supabase project, run schema, set env vars, then wire `/api/contact`.
 
 ### 2026-06-30 (404 creative redesign)
 

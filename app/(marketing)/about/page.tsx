@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
 import { JsonLd } from '@/components/seo/json-ld';
 import { personLd } from '@/lib/seo';
-
 export const metadata: Metadata = {
   title: 'About Abdullah Sherdy',
   description:
